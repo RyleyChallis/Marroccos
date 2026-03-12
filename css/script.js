@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     allForms.forEach(form => {
         form.addEventListener('submit', (e) => {
-            // Stops the redirect
             e.preventDefault();
 
             const btn = form.querySelector('button[type="submit"]');
@@ -137,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Elements
     const guestSelect = document.querySelector('select[name="guests"]');
     const dateInput = document.getElementById('res-date');
     const timeRadios = document.querySelectorAll('input[name="time"]');
@@ -146,12 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryDate = document.getElementById('summary-date');
     const summaryTime = document.getElementById('summary-time');
 
-    // 2. Set Minimum Date (Prevents past dates)
     const today = new Date().toISOString().split('T')[0];
     if (dateInput) {
         dateInput.setAttribute('min', today);
 
-        // 3. Update Date Summary when user picks a date
         dateInput.addEventListener('change', () => {
             const date = new Date(dateInput.value);
             const formatted = date.toLocaleDateString('en-GB', { 
@@ -161,14 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Guests Logic
     if (guestSelect) {
         guestSelect.addEventListener('change', () => {
             summaryGuests.innerText = `Table for ${guestSelect.value}`;
         });
     }
 
-    // 5. Time Logic
     timeRadios.forEach(radio => {
         radio.addEventListener('change', () => {
             summaryTime.innerText = `At ${radio.value}`;
